@@ -7,7 +7,7 @@
 
 Repository containing the assignments developed for the **Advanced Machine Learning** course at the **University of Milano-Bicocca (UNIMIB)** during the **2025/2026 academic year**.
 
-The repository collects the practical work carried out throughout the course, covering different aspects of modern machine learning, from data preprocessing and exploratory analysis to model training, evaluation and comparison.
+The repository collects the practical work carried out throughout the course, covering different aspects of modern machine learning, from data preprocessing and exploratory analysis to model training, evaluation, and comparison.
 
 ---
 
@@ -26,8 +26,10 @@ The repository collects the practical work carried out throughout the course, co
 * [Installation](#installation)
 * [Running the Notebooks](#running-the-notebooks)
 * [Results](#results)
+* [Reproducibility](#reproducibility)
 * [Academic Context](#academic-context)
 * [Author](#author)
+* [License](#license)
 
 ---
 
@@ -55,7 +57,7 @@ The repository is structured so that each assignment can be explored independent
 
 ---
 
-# Repository Structure
+## Repository Structure
 
 ```text
 Advanced_Machine_Learning/
@@ -75,7 +77,7 @@ Advanced_Machine_Learning/
 └── README.md
 ```
 
-Each assignment contains the material related to the corresponding coursework, including notebooks, source code, datasets and/or supporting files where applicable.
+Each assignment contains the material related to the corresponding coursework, including notebooks, source code, datasets, and/or supporting files where applicable.
 
 ---
 
@@ -87,45 +89,40 @@ Each assignment contains the material related to the corresponding coursework, i
 
 ### Overview
 
-The first assignment introduces the first set of practical problems addressed during the course.
+The first assignment focuses on a multinomial classification problem using the **Dry Bean Dataset** from the **UCI Machine Learning Repository**.
 
-The work focuses on applying machine learning methodologies to a dataset, following a complete workflow from data preparation to model evaluation.
+The dataset contains 16 numeric features extracted from images of dry beans captured with an RGB camera, categorized into 7 imbalanced classes.
 
-### Main steps
+### Main Steps
 
-* Dataset exploration
-* Exploratory Data Analysis
-* Data preprocessing
-* Feature preparation
-* Model development
-* Model training
+* Exploratory Data Analysis (EDA) and class distribution check
+* Data preprocessing (label encoding and one-hot encoding)
+* Dataset splitting (train/validation/test)
+* Feature standardization to prevent data leakage
+* Feed-Forward Neural Network development
+* Hyperparameter optimization (batch size, epochs, learning rate)
 * Model evaluation
-* Interpretation of results
 
 ### Methods
 
-> **To be completed with the specific models/algorithms implemented in the notebook.**
+* Feed-Forward Neural Networks
 
-Examples:
-
-* Regression / Classification
-* Linear models
-* Regularization
-* Cross-validation
-* Hyperparameter optimization
+  * 1 input layer
+  * 2 hidden layers with ReLU activation
+  * 1 output layer with Softmax activation
+* Categorical Focal Cross-Entropy Loss to handle class imbalance
+* Adam Optimizer
 
 ### Results
 
-> **Add the main quantitative results here.**
+The models were evaluated mainly using accuracy and the **Macro-Average ROC-AUC**, due to the presence of class imbalance.
 
-For example:
+The optimized model achieved excellent classification capabilities.
 
-| Model      | Metric               | Score |
-| ---------- | -------------------- | ----: |
-| Baseline   | Accuracy / RMSE / R² |     — |
-| Model 1    | Accuracy / RMSE / R² |     — |
-| Model 2    | Accuracy / RMSE / R² |     — |
-| Best Model | Accuracy / RMSE / R² |     — |
+| **Model**       | **Metric**        | **Score** |
+| --------------- | ----------------- | --------: |
+| First Model     | Macro-Average AUC |      0.99 |
+| Optimized Model | Macro-Average AUC |      0.99 |
 
 ---
 
@@ -135,44 +132,32 @@ For example:
 
 ### Overview
 
-The second assignment builds upon the concepts introduced previously and focuses on more advanced machine learning techniques.
+The second assignment focuses on **neural network optimization techniques** across three different problems.
 
-The analysis includes model development, comparison and evaluation using appropriate validation strategies.
+The main goal is to analyze baseline models suffering from unstable training, poor generalization, overfitting, or underfitting, and improve their architectures and training routines.
 
-### Main steps
+### Main Steps
 
-* Data preprocessing
-* Exploratory analysis
-* Feature engineering
-* Model training
-* Validation
-* Hyperparameter tuning
-* Model comparison
-* Error analysis
+* Analysis of learning curves (train/validation loss and accuracy)
+* Analysis of weight distributions
+* Hyperparameter tuning, particularly learning rate adjustment
+* Implementation of regularization techniques
+* Early Stopping implementation
 
 ### Methods
 
-> **To be completed with the specific algorithms used in Assignment 2.**
-
-Potential topics include:
-
-* Ensemble learning
-* Tree-based models
-* Gradient boosting
-* Support Vector Machines
-* Neural networks
-* Dimensionality reduction
+* L1 regularization
+* L2 regularization
+* Combined L1/L2 regularization
+* Dropout layers
+* Early Stopping
+* Deep Neural Network optimization
 
 ### Results
 
-The performance of the considered approaches is compared using appropriate evaluation metrics.
+* **Problem 1 & 3:** Severe overfitting and unstable training were successfully mitigated by decreasing the learning rate, applying L2 regularization, adding Dropout (0.25), and using Early Stopping. The final models achieved smooth loss curves and good generalization.
 
-| Model      | Metric | Score |
-| ---------- | ------ | ----: |
-| Baseline   | —      |     — |
-| Model 1    | —      |     — |
-| Model 2    | —      |     — |
-| Best Model | —      |     — |
+* **Problem 2:** The original dense network was highly prone to overfitting. L1/L2 and L2 regularization were combined with Dropout (0.2). Although overfitting was solved, the resulting model suffered from underfitting, with accuracy around 50%. This suggests that, for this specific task, an alternative architecture such as a **Convolutional Neural Network (CNN)** may be more appropriate.
 
 ---
 
@@ -182,41 +167,37 @@ The performance of the considered approaches is compared using appropriate evalu
 
 ### Overview
 
-The third assignment explores additional advanced machine learning concepts, with particular attention to model performance, generalization and the analysis of the obtained results.
+The third assignment focuses on improving the **efficiency of Deep Learning models**.
 
-### Main steps
+The objective is to take a baseline Convolutional Neural Network trained on the **MNIST digit dataset**, which contains 34,826 parameters and achieves approximately 98.75% accuracy, and drastically reduce its complexity to fewer than 7,000 parameters without degrading predictive performance.
 
-* Data analysis
-* Preprocessing
-* Feature extraction / engineering
-* Model selection
-* Training
-* Validation
-* Performance evaluation
-* Comparison of alternative approaches
+### Main Steps
+
+* Baseline model evaluation
+* Iterative parameter reduction strategies
+* Modification of pooling layers
+* Kernel size tuning
+* Dense layer removal
 
 ### Methods
 
-> **To be completed based on the actual notebook.**
-
-Possible techniques include:
-
-* Unsupervised learning
-* Dimensionality reduction
-* Clustering
-* Anomaly detection
-* Advanced classification methods
+* Convolutional Neural Networks (CNNs)
+* Average Pooling, used to replace Max Pooling to preserve contextual information
+* Network pruning and simplification
+* Dropout
 
 ### Results
 
-The main results obtained during the experiments are summarized below.
+The goal was successfully achieved.
 
-| Approach      | Metric | Result |
-| ------------- | ------ | -----: |
-| Baseline      | —      |      — |
-| Method 1      | —      |      — |
-| Method 2      | —      |      — |
-| Best approach | —      |      — |
+The best model (**Model 3**) used a consistent 3×3 kernel size, removed the final pooling layer to preserve spatial structure, and achieved higher accuracy than the baseline while reducing the number of parameters to less than one tenth.
+
+| **Model**    | **Parameters** | **Accuracy** |
+| ------------ | -------------: | -----------: |
+| Baseline CNN |         34,826 |      ~98.75% |
+| Model 1      |          4,546 |      ~97.30% |
+| Model 2      |          4,138 |      ~98.92% |
+| **Model 3**  |      **3,282** |  **~99.02%** |
 
 ---
 
@@ -226,33 +207,46 @@ The main results obtained during the experiments are summarized below.
 
 ### Overview
 
-The fourth assignment concludes the practical part of the course by applying advanced machine learning methodologies to a final problem.
+The fourth assignment focuses on **sequential data and Natural Language Processing (NLP)**.
 
-The analysis emphasizes model comparison, performance evaluation and interpretation of the results.
+The goal is to perform **next-character prediction** based on a fixed-size input window.
 
-### Main steps
+The dataset used for this task is the text of *Alice's Adventures in Wonderland* by **Lewis Carroll**.
 
-* Dataset preparation
-* Exploratory Data Analysis
-* Feature engineering
-* Model development
-* Hyperparameter optimization
-* Model evaluation
-* Comparison of different approaches
-* Final analysis
+### Main Steps
+
+* Raw text preprocessing
+
+  * Removal of Gutenberg introductions
+  * Removal of table of contents
+  * Removal of licenses
+* Sequential dataset creation
+
+  * Maximum sentence length of 40
+  * Step size of 2
+* Temporal train/validation/test split without shuffling
+* Baseline CNN evaluation
+* Development of a proposed hybrid architecture
 
 ### Methods
 
-> **To be completed with the actual models implemented in Assignment 4.**
+* Natural Language Processing (NLP)
+* Text generation
+* 1D Convolutional Neural Networks (Conv1D) for feature extraction
+* Long Short-Term Memory Networks (LSTM) for recurrent pattern capturing
+* Adam Optimizer
+* Early Stopping
 
 ### Results
 
-| Model      | Metric | Score |
-| ---------- | ------ | ----: |
-| Baseline   | —      |     — |
-| Model 1    | —      |     — |
-| Model 2    | —      |     — |
-| Best Model | —      |     — |
+The proposed hybrid architecture (**Conv1D + LSTM**) significantly outperformed the purely convolutional baseline, demonstrating greater effectiveness in predicting both frequent and infrequent characters.
+
+| **Model**                    | **Metric**            |  **Score** |
+| ---------------------------- | --------------------- | ---------: |
+| Baseline (CNN)               | Accuracy              |     16.76% |
+| Baseline (CNN)               | Macro-Average AUC     |      0.582 |
+| **Proposed (Conv1D + LSTM)** | **Accuracy**          | **51.76%** |
+| **Proposed (Conv1D + LSTM)** | **Macro-Average AUC** |  **0.893** |
 
 ---
 
@@ -305,21 +299,22 @@ Across the assignments, the projects follow a typical machine learning pipeline:
              └──────────────────┘
 ```
 
-This structure allows the experiments to be evaluated not only in terms of final predictive performance, but also in terms of preprocessing choices, model assumptions and generalization capabilities.
+This structure allows the experiments to be evaluated not only in terms of final predictive performance, but also in terms of preprocessing choices, model assumptions, and generalization capabilities.
 
 ---
 
 # Technologies
 
-The projects are primarily developed in **Python** using the scientific Python and machine learning ecosystem.
+The projects are primarily developed in **Python**, using the scientific Python and machine learning ecosystem.
 
-### Core technologies
+### Core Technologies
 
 * [Python](https://www.python.org/)
 * [Jupyter Notebook](https://jupyter.org/)
 * [NumPy](https://numpy.org/)
 * [Pandas](https://pandas.pydata.org/)
 * [Scikit-learn](https://scikit-learn.org/)
+* [TensorFlow / Keras](https://www.tensorflow.org/)
 * [Matplotlib](https://matplotlib.org/)
 * [Seaborn](https://seaborn.pydata.org/)
 
@@ -329,14 +324,14 @@ Additional libraries may be used in individual assignments depending on the spec
 
 # Installation
 
-Clone the repository:
+## Clone the Repository
 
 ```bash
 git clone https://github.com/niki-molte/Advanced_Machine_Learning.git
 cd Advanced_Machine_Learning
 ```
 
-Create a virtual environment:
+## Create a Virtual Environment
 
 ### Linux / macOS
 
@@ -352,7 +347,7 @@ python -m venv .venv
 .venv\Scripts\activate
 ```
 
-Install the required dependencies:
+## Install Dependencies
 
 ```bash
 pip install -r requirements.txt
@@ -364,15 +359,15 @@ If a global `requirements.txt` is not available, install the dependencies specif
 
 # Running the Notebooks
 
-The assignments are primarily designed to be executed using Jupyter Notebook.
+The assignments are primarily designed to be executed using **Jupyter Notebook**.
 
-Start Jupyter with:
+Start Jupyter Notebook with:
 
 ```bash
 jupyter notebook
 ```
 
-or:
+or JupyterLab with:
 
 ```bash
 jupyter lab
@@ -403,7 +398,7 @@ Depending on the specific task, relevant metrics may include:
 * Precision
 * Recall
 * F1-score
-* ROC-AUC
+* ROC-AUC (Macro-Average)
 * Confusion Matrix
 
 ### Regression
@@ -417,8 +412,8 @@ Depending on the specific task, relevant metrics may include:
 
 * Silhouette Score
 * Inertia
-* Reconstruction error
-* Cluster quality measures
+* Reconstruction Error
+* Cluster Quality Measures
 
 The exact metrics used are reported within the corresponding assignment notebooks.
 
@@ -443,7 +438,9 @@ For best reproducibility:
 # Academic Context
 
 **Course:** Advanced Machine Learning
+
 **University:** Università degli Studi di Milano-Bicocca (UNIMIB)
+
 **Academic Year:** 2025/2026
 
 The repository is intended primarily for academic and educational purposes.
@@ -455,12 +452,14 @@ The repository is intended primarily for academic and educational purposes.
 **Nicolò Molteni**
 
 Advanced Machine Learning
+
 Università degli Studi di Milano-Bicocca
+
 Academic Year 2025/2026
 
 ---
 
-## License
+# License
 
 This repository contains coursework developed as part of a university course.
 
